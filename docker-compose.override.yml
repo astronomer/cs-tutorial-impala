@@ -1,0 +1,26 @@
+version: '2'
+services:
+    cloudera:
+        image: cloudera/quickstart:latest
+        hostname: quickstart.cloudera
+        networks:
+            - airflow
+        privileged: true
+        stdin_open: true
+        tty: true
+        ports:
+            - "80:80"
+            - "8888:8888"
+            - "7180:7180"
+            - "22000:22000"
+            - "21050:21050"
+            - "22:22"
+        command: "/usr/bin/docker-quickstart && sqoop import-all-tables \
+                    -m 1 \
+                    --connect jdbc:mysql://quickstart:3306/retail_db \
+                    --username=retail_dba \
+                    --password=cloudera \
+                    --compression-codec=snappy \
+                    --as-parquetfile \
+                    --warehouse-dir=/user/hive/warehouse \
+                    --hive-import"

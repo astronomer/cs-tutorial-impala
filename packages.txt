@@ -1,0 +1,10 @@
+build-essential
+python3-pip
+python3-dev
+unixodbc-dev
+openssh-server
+openssh-client
+vim
+gnupg
+apt-transport-https
+unixodbc
